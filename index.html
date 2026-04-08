@@ -19,6 +19,33 @@
             align-items: center;
             min-height: 100vh;
             overflow: hidden;
+            <!-- Аудио-плеер (скрыт) -->
+<audio id="bg-music" loop>
+    <source src="https://archive.org" type="audio/mpeg">
+    <!-- Если ссылка выше перестанет работать, замените src на другую прямую ссылку на mp3 -->
+</audio>
+
+<script>
+    const audio = document.getElementById('bg-music');
+    
+    // Функция для запуска музыки
+    function startMusic() {
+        audio.play().catch(error => {
+            console.log("Автовоспроизведение заблокировано браузером. Ожидаем клика.");
+        });
+        // Удаляем слушателей, чтобы музыка не перезапускалась при каждом клике
+        window.removeEventListener('click', startMusic);
+        window.removeEventListener('touchstart', startMusic);
+    }
+
+    // Запускаем музыку при первом клике или касании экрана
+    window.addEventListener('click', startMusic);
+    window.addEventListener('touchstart', startMusic);
+
+    // Устанавливаем громкость (0.5 = 50%)
+    audio.volume = 0.4;
+</script>
+
         }
 
         #snow-canvas {
